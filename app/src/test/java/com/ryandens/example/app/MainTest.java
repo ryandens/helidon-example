@@ -10,6 +10,10 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;
 
+/**
+ * test classes cannot be final because {@link HelidonTest} uses weld to create dynamic proxies of
+ * test classes to do dependency injection
+ */
 @HelidonTest
 class MainTest {
   private final WebTarget target;

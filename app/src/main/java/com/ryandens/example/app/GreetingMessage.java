@@ -1,11 +1,11 @@
 package com.ryandens.example.app;
 
 /** POJO defining the greeting message content. */
-@SuppressWarnings("unused")
 public class GreetingMessage {
   private String message;
 
   /** Create a new GreetingMessage instance. */
+  @SuppressWarnings("unused")
   public GreetingMessage() {}
 
   /**

@@ -6,6 +6,7 @@
 
 plugins {
     id("com.ryandens.example.java-application-conventions")
+    id("com.github.vlsi.jandex") version "1.90"
 }
 
 dependencies {

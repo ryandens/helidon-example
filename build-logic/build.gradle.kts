@@ -13,6 +13,7 @@ spotless {
 dependencies {
     implementation(libs.spotless)
     implementation(libs.jandexPlugin)
+    implementation(libs.jlinkJrePlugin)
     implementation(libs.jlinkPlugin)
     implementation(libs.jlinkJibPlugin)
     implementation(libs.temurinBinaries)

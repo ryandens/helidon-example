@@ -5,6 +5,7 @@ spotless = "6.24.0"
 
 [libraries]
 spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version.ref = "spotless" }
+jandexPlugin = { module = "com.github.vlsi.jandex:com.github.vlsi.jandex.gradle.plugin", version = "1.90"}
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

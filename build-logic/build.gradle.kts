@@ -19,6 +19,7 @@ spotless {
 
 dependencies {
     implementation(libs.spotless)
+    implementation(libs.jandexPlugin)
 }
 
 repositories {

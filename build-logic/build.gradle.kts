@@ -14,6 +14,9 @@ dependencies {
     implementation(libs.spotless)
     implementation(libs.jandexPlugin)
     implementation(libs.jlinkPlugin)
+    implementation(libs.jlinkJibPlugin)
+    implementation(libs.temurinBinaries)
+    implementation(libs.jibPlugin)
 }
 
 repositories {

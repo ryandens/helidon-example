@@ -16,8 +16,24 @@ dependencies {
     runtimeOnly("io.smallrye:jandex")
     runtimeOnly("jakarta.activation:jakarta.activation-api")
     testImplementation("io.helidon.microprofile.testing:helidon-microprofile-testing-junit5")
+    testImplementation("org.assertj:assertj-core:3.11.1")
     implementation("org.apache.commons:commons-text")
     implementation(project(":utilities"))
+}
+
+tasks.processResources {
+    this.exclude("META-INF/beans.xml")
+}
+
+val copyBeans =
+    tasks.create<Copy>("copyBeans") {
+        dependsOn("processResources")
+        from(layout.projectDirectory.dir("src/main/resources/META-INF/beans.xml"))
+        into(layout.buildDirectory.dir("classes/java/main/META-INF"))
+    }
+
+tasks.compileJava {
+    dependsOn(copyBeans)
 }
 
 application {

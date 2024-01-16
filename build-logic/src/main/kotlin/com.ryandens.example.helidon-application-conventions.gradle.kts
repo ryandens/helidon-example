@@ -16,7 +16,16 @@ dependencies {
 }
 
 jlinkJre {
-    modules = listOf("java.logging", "java.xml", "java.naming", "java.desktop", "java.management", "java.sql", "jdk.unsupported")
+    modules =
+        listOf(
+            "java.desktop",
+            "java.logging",
+            "java.management",
+            "java.naming",
+            "java.sql",
+            "java.xml",
+            "jdk.unsupported",
+        )
 }
 
 application {

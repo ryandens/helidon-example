@@ -1,6 +1,7 @@
 plugins {
     id("com.ryandens.example.java-application-conventions")
     id("com.github.vlsi.jandex")
+    id("com.ryandens.jlink-application")
 }
 
 dependencies {
@@ -11,6 +12,10 @@ dependencies {
     runtimeOnly("jakarta.activation:jakarta.activation-api")
     testImplementation("io.helidon.microprofile.testing:helidon-microprofile-testing-junit5")
     testImplementation("org.assertj:assertj-core:3.11.1")
+}
+
+jlinkJre {
+    modules = listOf("java.logging", "java.xml", "java.naming", "java.desktop", "java.management", "java.sql", "jdk.unsupported")
 }
 
 sourceSets {

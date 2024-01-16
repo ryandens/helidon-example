@@ -7,11 +7,21 @@
 plugins {
     // Apply the java Plugin to add support for Java.
     java
+    id("com.diffplug.spotless")
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+    }
+    kotlinGradle {
+        ktlint()
+    }
 }
 
 dependencies {

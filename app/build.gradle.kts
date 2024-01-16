@@ -9,11 +9,17 @@ plugins {
 }
 
 dependencies {
+    implementation(enforcedPlatform("io.helidon:helidon-dependencies:4.0.2"))
+    implementation("io.helidon.microprofile.bundles:helidon-microprofile")
+    implementation("org.glassfish.jersey.media:jersey-media-json-binding")
+    runtimeOnly("io.smallrye:jandex")
+    runtimeOnly("jakarta.activation:jakarta.activation-api")
+    testImplementation("io.helidon.microprofile.testing:helidon-microprofile-testing-junit5")
     implementation("org.apache.commons:commons-text")
     implementation(project(":utilities"))
 }
 
 application {
     // Define the main class for the application.
-    mainClass.set("com.ryandens.example.app.App")
+    mainClass.set("io.helidon.microprofile.cdi.Main")
 }

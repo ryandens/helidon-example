@@ -17,6 +17,10 @@ spotless {
     }
 }
 
+dependencies {
+    implementation(libs.spotless)
+}
+
 repositories {
     // Use the plugin portal to apply community plugins in convention plugins.
     gradlePluginPortal()

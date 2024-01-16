@@ -1,5 +1,6 @@
 plugins {
     id("com.ryandens.example.java-application-conventions")
+    id("com.ryandens.example.weld-conventions")
     id("com.github.vlsi.jandex")
     id("com.ryandens.jlink-application")
 }
@@ -16,28 +17,6 @@ dependencies {
 
 jlinkJre {
     modules = listOf("java.logging", "java.xml", "java.naming", "java.desktop", "java.management", "java.sql", "jdk.unsupported")
-}
-
-sourceSets {
-    named("main") {
-        java {
-            srcDir("src/main/beans")
-        }
-    }
-}
-
-tasks.register<Copy>("processBeansXml") {
-    from(layout.projectDirectory.file("src/main/beans/beans.xml"))
-    into(layout.buildDirectory.dir("classes/java/main/META-INF"))
-    doLast {
-        if (inputs.sourceFiles.isEmpty) {
-            throw GradleException("No beans.xml found in ${inputs.files}")
-        }
-    }
-}
-
-tasks.compileJava {
-    dependsOn("processBeansXml")
 }
 
 application {

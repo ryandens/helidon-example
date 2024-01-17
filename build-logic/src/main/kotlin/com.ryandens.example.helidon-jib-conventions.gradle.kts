@@ -31,6 +31,7 @@ jib.container {
 
 listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->
     jibTask {
+        dependsOn(tasks.processJandexIndex)
         notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache")
     }
 }

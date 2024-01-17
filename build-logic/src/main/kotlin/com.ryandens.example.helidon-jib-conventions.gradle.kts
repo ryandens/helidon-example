@@ -31,6 +31,7 @@ jib.container {
 
 listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->
     jibTask {
+        // this dependsOn not needed locally, but was on a GitHub Actions ubuntu runner
         dependsOn(tasks.processJandexIndex)
         notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache")
     }

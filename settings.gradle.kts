@@ -7,5 +7,19 @@ plugins {
     id("com.gradle.enterprise") version "3.16.1"
 }
 
+val isCI = providers.environmentVariable("CI").isPresent
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+        isUploadInBackground = !isCI
+
+        if (isCI) {
+            publishAlways()
+        }
+    }
+}
+
 rootProject.name = "helidon-example"
 include("app")

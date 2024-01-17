@@ -27,4 +27,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build and test application distributions
-        run: ./gradlew build jibBuildTar
+        run: ./gradlew build
+
+      - name: 🐳 build container images
+        run: ./gradlew jibBuildTar

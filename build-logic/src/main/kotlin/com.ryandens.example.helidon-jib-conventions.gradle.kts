@@ -29,8 +29,10 @@ jib.container {
     mainClass = "io.helidon.microprofile.cdi.Main"
 }
 
-tasks.jibDockerBuild {
-    notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache")
+listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->
+    jibTask {
+        notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache")
+    }
 }
 
 jib.from {

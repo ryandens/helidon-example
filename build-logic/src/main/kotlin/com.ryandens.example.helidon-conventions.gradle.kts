@@ -10,5 +10,5 @@ dependencies {
     runtimeOnly("io.smallrye:jandex")
     runtimeOnly("jakarta.activation:jakarta.activation-api")
     testImplementation("io.helidon.microprofile.testing:helidon-microprofile-testing-junit5")
-    testImplementation("org.assertj:assertj-core:3.25.1")
+    testImplementation("org.assertj:assertj-core:3.25.2")
 }

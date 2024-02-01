@@ -17,7 +17,6 @@ sourceSets {
     }
 }
 
-
 // this allows us to treat the beans file specially and removes the need for the workarounds described in the
 // jib issue and described here https://github.com/helidon-io/helidon/blob/4.0.3/examples/quickstarts/helidon-quickstart-mp/build.gradle#L97
 // in a way that lets helidon tests and jib have the beans.xml file in a location that is compatible with weld

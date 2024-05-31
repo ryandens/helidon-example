@@ -10,7 +10,7 @@ jlinkPlugin = { module = "com.ryandens.jlink-application:com.ryandens.jlink-appl
 jlinkJibPlugin = { module = "com.ryandens.jlink-jib:com.ryandens.jlink-jib.gradle.plugin", version.ref = "jlink"}
 jlinkJrePlugin = { module = "com.ryandens.jlink-jre:com.ryandens.jlink-jre.gradle.plugin", version.ref = "jlink"}
 temurinBinaries = { module = "com.ryandens.temurin-binaries-repository:com.ryandens.temurin-binaries-repository.gradle.plugin", version.ref = "jlink"}
-jibPlugin = {module = "com.google.cloud.tools.jib:com.google.cloud.tools.jib.gradle.plugin", version = "3.4.2"}
+jibPlugin = {module = "com.google.cloud.tools.jib:com.google.cloud.tools.jib.gradle.plugin", version = "3.4.3"}
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

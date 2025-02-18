@@ -4,7 +4,7 @@ pluginManagement {
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
-    id("com.gradle.enterprise") version "3.19"
+    id("com.gradle.enterprise") version "3.19.2"
 }
 
 val isCI = providers.environmentVariable("CI").isPresent

@@ -1,10 +1,6 @@
 plugins {
     java
-    id("com.diffplug.spotless")
-}
-
-repositories {
-    mavenCentral()
+    id("com.ryandens.example.base")
 }
 
 dependencies {
@@ -14,9 +10,6 @@ dependencies {
 spotless {
     java {
         googleJavaFormat()
-    }
-    kotlinGradle {
-        ktlint()
     }
 }
 

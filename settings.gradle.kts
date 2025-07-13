@@ -15,7 +15,11 @@ develocity {
         termsOfUseAgree.set("yes")
         uploadInBackground.set(!isCI)
 
-        publishing.onlyIf { isCI }
+        if (isCI) {
+            publishing.onlyIf { true }
+        } else {
+            publishing.onlyIf { false }
+        }
     }
 }
 

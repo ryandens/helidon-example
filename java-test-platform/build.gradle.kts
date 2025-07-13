@@ -6,5 +6,5 @@ plugins {
 javaPlatform.allowDependencies()
 
 dependencies {
-    api(platform(libs.junit))
+    api(enforcedPlatform(libs.junit))
 }

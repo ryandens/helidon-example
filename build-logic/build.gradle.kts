@@ -18,6 +18,7 @@ dependencies {
     implementation(libs.jlinkJibPlugin)
     implementation(libs.temurinBinaries)
     implementation(libs.jibPlugin)
+    implementation(libs.javaagentTest)
 }
 
 repositories {

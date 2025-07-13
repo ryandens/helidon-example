@@ -4,20 +4,18 @@ pluginManagement {
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
-    id("com.gradle.enterprise") version "3.19.2"
+    id("com.gradle.develocity") version "4.0.2"
 }
 
 val isCI = providers.environmentVariable("CI").isPresent
 
-gradleEnterprise {
+develocity {
     buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-        isUploadInBackground = !isCI
+        termsOfUseUrl.set("https://gradle.com/help/legal-terms-of-use")
+        termsOfUseAgree.set("yes")
+        uploadInBackground.set(!isCI)
 
-        if (isCI) {
-            publishAlways()
-        }
+        publishing.onlyIf { isCI }
     }
 }
 

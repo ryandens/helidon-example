@@ -24,4 +24,4 @@ develocity {
 }
 
 rootProject.name = "helidon-example"
-include("app")
+include("app", "java-test-platform")

@@ -1,8 +1,11 @@
 package com.ryandens.example.app;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
+import io.helidon.microprofile.testing.AddBean;
 import io.helidon.microprofile.testing.junit5.HelidonTest;
+import io.helidon.microprofile.testing.mocking.MockBean;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
@@ -15,12 +18,16 @@ import org.junit.jupiter.api.Test;
  * test classes to do dependency injection
  */
 @HelidonTest
+@AddBean(GreetingRecorder.class)
 class MainTest {
 
   @Inject WebTarget target;
 
+  @MockBean GreetingRecorder greetingRecorder;
+
   @Test
   void testHelloWorld() {
+    when(greetingRecorder.record()).thenReturn(true);
 
     GreetingMessage message = target.path("/greet").request().get(GreetingMessage.class);
     assertThat(message.getMessage()).isEqualTo("Hello World!");

@@ -4,6 +4,7 @@ spotless = "7.1.0"
 jlink = "0.4.1"
 
 [libraries]
+junit = { module = "org.junit:junit-bom", version = "5.9.3" }
 spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version.ref = "spotless" }
 jandexPlugin = { module = "com.github.vlsi.jandex:com.github.vlsi.jandex.gradle.plugin", version = "1.90"}
 jlinkPlugin = { module = "com.ryandens.jlink-application:com.ryandens.jlink-application.gradle.plugin", version.ref = "jlink"}

@@ -7,4 +7,5 @@ javaPlatform.allowDependencies()
 
 dependencies {
     api(enforcedPlatform(libs.junit))
+    api(enforcedPlatform(libs.mockito))
 }

@@ -7,6 +7,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    testImplementation(platform(project(":java-test-platform")))
+}
+
 spotless {
     java {
         googleJavaFormat()
@@ -21,7 +25,7 @@ testing {
         // Configure the built-in test suite
         val test by getting(JvmTestSuite::class) {
             // Use JUnit Jupiter test framework
-            useJUnitJupiter("5.10.0")
+            useJUnitJupiter()
         }
     }
 }

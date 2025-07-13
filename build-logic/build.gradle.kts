@@ -8,6 +8,10 @@ spotless {
         target("*.gradle.kts", "src/main/kotlin/*.gradle.kts")
         ktlint()
     }
+    kotlin {
+        target("src/*/kotlin/**/*.kt")
+        ktlint()
+    }
 }
 
 dependencies {

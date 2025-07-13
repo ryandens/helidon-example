@@ -34,6 +34,8 @@ public class GreetResource {
   /** The greeting message provider. */
   private final GreetingProvider greetingProvider;
 
+  private final GreetingRecorder greetingRecorder;
+
   /**
    * Using constructor injection to get a configuration property. By default this gets the value
    * from META-INF/microprofile-config
@@ -41,8 +43,9 @@ public class GreetResource {
    * @param greetingConfig the configured greeting message
    */
   @Inject
-  public GreetResource(GreetingProvider greetingConfig) {
+  public GreetResource(GreetingProvider greetingConfig, GreetingRecorder greetingRecorder) {
     this.greetingProvider = greetingConfig;
+    this.greetingRecorder = greetingRecorder;
   }
 
   /**
@@ -66,7 +69,9 @@ public class GreetResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public GreetingMessage getMessage(@PathParam("name") String name) {
-    return createResponse(name);
+    final var response = createResponse(name);
+    greetingRecorder.record();
+    return response;
   }
 
   /**

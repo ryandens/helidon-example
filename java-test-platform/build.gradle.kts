@@ -1,4 +1,5 @@
 plugins {
+    id("com.ryandens.example.base")
     id("java-platform")
 }
 

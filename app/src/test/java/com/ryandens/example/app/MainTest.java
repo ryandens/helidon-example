@@ -16,12 +16,8 @@ import org.junit.jupiter.api.Test;
  */
 @HelidonTest
 class MainTest {
-  private final WebTarget target;
 
-  @Inject
-  MainTest(WebTarget target) {
-    this.target = target;
-  }
+  @Inject WebTarget target;
 
   @Test
   void testHelloWorld() {

@@ -5,7 +5,7 @@ jlink = "0.4.1"
 
 [libraries]
 junit = { module = "org.junit:junit-bom", version = "5.13.4" }
-mockito = { module = "org.mockito:mockito-bom", version = "5.18.0" }
+mockito = { module = "org.mockito:mockito-bom", version = "5.20.0" }
 spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version.ref = "spotless" }
 jandexPlugin = { module = "com.github.vlsi.jandex:com.github.vlsi.jandex.gradle.plugin", version = "2.0.0"}
 jlinkPlugin = { module = "com.ryandens.jlink-application:com.ryandens.jlink-application.gradle.plugin", version.ref = "jlink"}

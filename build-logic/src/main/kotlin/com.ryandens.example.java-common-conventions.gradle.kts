@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    testImplementation(platform(project(":java-test-platform")))
+    testImplementation(enforcedPlatform(project(":java-test-platform")))
 }
 
 spotless {

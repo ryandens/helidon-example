@@ -9,20 +9,20 @@ plugins {
     id("com.ryandens.temurin-binaries-repository")
 }
 
-val jdk by configurations.creating {
+val jmods by configurations.creating {
     isCanBeResolved = true
     isCanBeConsumed = false
-    isVisible = false
+    isCanBeDeclared = true
 }
 
-val copyJdks =
+val copyJmods =
     tasks.register<Copy>("copyJdks") {
-        from(provider { tarTree(jdk.singleFile) })
+        from(provider { tarTree(jmods.singleFile) })
         into(project.layout.buildDirectory.dir("jdks"))
     }
 
 dependencies {
-    jdk("temurin21-binaries:OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.1_12:jdk-21.0.1+12@tar.gz")
+    jmods("temurin25-binaries:OpenJDK25U-jmods_aarch64_linux_hotspot_25.0.2_10:jdk-25.0.2+10@tar.gz")
 }
 
 jib.container {
@@ -38,7 +38,7 @@ listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->
 }
 
 jib.from {
-    image = "gcr.io/distroless/java-base-debian11:nonroot-arm64@sha256:f4ca7f7f88b9e10329ce0d798a7035ef2e9cb6ff447766281036ce43876489aa"
+    image = "gcr.io/distroless/java-base-debian13:nonroot-arm64@sha256:2829fac2eca538aaf6dca9bee7f31ec99dc9a7a52767c0817e78a8b4c82482ee"
 }
 
 val linuxJlinkJre =
@@ -46,7 +46,7 @@ val linuxJlinkJre =
         // by default, JlinkJreTask uses the module path associated with the configured java toolchain that is executing
         // the jlink command, but this can be overridden to instead point at a different jmods directory for the purpose
         // of building a JRE for a different platform
-        this.modulePath.fileProvider(copyJdks.map { File(it.destinationDir, "jdk-21.0.1+12/jmods/") })
+        this.modulePath.fileProvider(copyJmods.map { File(it.destinationDir, "jdk-25.0.2+10-jmods/") })
         outputDirectory.set(file(layout.buildDirectory.dir("jlink-jre-linux")))
     }
 

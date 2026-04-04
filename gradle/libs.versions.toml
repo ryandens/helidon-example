@@ -1,7 +1,7 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 [versions]
 spotless = "8.4.0"
-jlink = "0.6.0"
+jlink = "0.7.0"
 
 [libraries]
 junit = { module = "org.junit:junit-bom", version = "6.0.3" }

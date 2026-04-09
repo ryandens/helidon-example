@@ -4,7 +4,7 @@ import org.gradle.api.tasks.Copy
 plugins {
     id("com.ryandens.example.helidon-conventions")
     id("com.ryandens.example.jlink-helidon-conventions")
-    id("com.google.cloud.tools.jib")
+    id("tel.schich.tinyjib")
     id("com.ryandens.jlink-jib")
     id("com.ryandens.temurin-binaries-repository")
 }
@@ -25,20 +25,23 @@ dependencies {
     jmods("temurin25-binaries:OpenJDK25U-jmods_aarch64_linux_hotspot_25.0.2_10:jdk-25.0.2+10@tar.gz")
 }
 
-jib.container {
-    mainClass = "io.helidon.microprofile.cdi.Main"
-}
-
-listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->
-    jibTask {
-        // this dependsOn not needed locally, but was on a GitHub Actions ubuntu runner
-        dependsOn(tasks.processJandexIndex)
-        notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache")
+tinyJib {
+    from {
+        image = "gcr.io/distroless/java-base-debian13:nonroot-arm64@sha256:2829fac2eca538aaf6dca9bee7f31ec99dc9a7a52767c0817e78a8b4c82482ee"
+    }
+    to {
+        image = "${project.name}:${project.version}"
+    }
+    container {
+        mainClass = "io.helidon.microprofile.cdi.Main"
     }
 }
 
-jib.from {
-    image = "gcr.io/distroless/java-base-debian13:nonroot-arm64@sha256:2829fac2eca538aaf6dca9bee7f31ec99dc9a7a52767c0817e78a8b4c82482ee"
+listOf(tasks.tinyJibDocker, tasks.tinyJibTar, tasks.tinyJibPublish).forEach { jibTask ->
+    jibTask {
+        // this dependsOn not needed locally, but was on a GitHub Actions ubuntu runner
+        dependsOn(tasks.processJandexIndex)
+    }
 }
 
 val linuxJlinkJre =

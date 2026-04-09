@@ -21,10 +21,11 @@ dependencies {
     implementation(libs.jlinkPlugin)
     implementation(libs.jlinkJibPlugin)
     implementation(libs.temurinBinaries)
-    implementation(libs.jibPlugin)
+    implementation(libs.tinyJib)
     implementation(libs.javaagentTest)
 }
 
 repositories {
     gradlePluginPortal()
+    mavenLocal()
 }

@@ -1,5 +1,9 @@
 pluginManagement {
     includeBuild("build-logic")
+    repositories {
+        gradlePluginPortal()
+        mavenLocal()
+    }
 }
 
 plugins {

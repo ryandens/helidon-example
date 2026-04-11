@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(platform("io.helidon:helidon-dependencies:4.4.0"))
+    implementation(platform("io.helidon:helidon-dependencies:4.4.1"))
     implementation("io.helidon.microprofile.bundles:helidon-microprofile")
     implementation("org.glassfish.jersey.media:jersey-media-json-binding")
     runtimeOnly("io.smallrye:jandex")

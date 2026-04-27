@@ -14,6 +14,8 @@ jlinkJrePlugin = { module = "com.ryandens.jlink-jre:com.ryandens.jlink-jre.gradl
 temurinBinaries = { module = "com.ryandens.temurin-binaries-repository:com.ryandens.temurin-binaries-repository.gradle.plugin", version.ref = "jlink"}
 jibPlugin = {module = "com.google.cloud.tools.jib:com.google.cloud.tools.jib.gradle.plugin", version = "3.5.3"}
 javaagentTest = { module = "com.ryandens.javaagent-test:com.ryandens.javaagent-test.gradle.plugin", version = "0.12.0"}
+javaagentJibPlugin = { module = "com.ryandens.javaagent-jib:com.ryandens.javaagent-jib.gradle.plugin", version = "0.12.0"}
+otelAgent = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent", version = "2.27.0"}
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

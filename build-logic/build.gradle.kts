@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.temurinBinaries)
     implementation(libs.jibPlugin)
     implementation(libs.javaagentTest)
+    implementation(libs.javaagentJibPlugin)
 }
 
 repositories {

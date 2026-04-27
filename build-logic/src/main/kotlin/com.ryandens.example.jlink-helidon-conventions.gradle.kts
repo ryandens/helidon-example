@@ -7,6 +7,7 @@ jlinkJre {
     modules =
         listOf(
             "java.desktop",
+            "java.instrument",
             "java.logging",
             "java.management",
             "java.naming",

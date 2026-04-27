@@ -23,7 +23,7 @@ val copyJmods =
     }
 
 dependencies {
-    jmods("temurin26-binaries:OpenJDK26U-jmods_aarch64_linux_hotspot_26_35:jdk-26+35@tar.gz")
+    jmods("temurin26-binaries:OpenJDK26U-jmods_x64_linux_hotspot_26_35:jdk-26+35@tar.gz")
     javaagent("io.opentelemetry.javaagent:opentelemetry-javaagent:2.27.0")
 }
 
@@ -46,7 +46,7 @@ listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->
 }
 
 jib.from {
-    image = "gcr.io/distroless/java-base-debian13:nonroot-arm64@sha256:2829fac2eca538aaf6dca9bee7f31ec99dc9a7a52767c0817e78a8b4c82482ee"
+    image = "gcr.io/distroless/java-base-debian13:nonroot-amd64@sha256:ac93c1e6311da011b4aa5dbbbebc9deb48496177499ce186480ed1d033be627f"
 }
 
 val linuxJlinkJre =

@@ -7,6 +7,7 @@ plugins {
     id("com.google.cloud.tools.jib")
     id("com.ryandens.jlink-jib")
     id("com.ryandens.temurin-binaries-repository")
+    id("com.ryandens.javaagent-jib")
 }
 
 val jmods by configurations.creating {
@@ -23,10 +24,17 @@ val copyJmods =
 
 dependencies {
     jmods("temurin26-binaries:OpenJDK26U-jmods_aarch64_linux_hotspot_26_35:jdk-26+35@tar.gz")
+    javaagent("io.opentelemetry.javaagent:opentelemetry-javaagent:2.27.0")
 }
 
 jib.container {
     mainClass = "io.helidon.microprofile.cdi.Main"
+    environment =
+        mapOf(
+            "OTEL_TRACES_EXPORTER" to "logging",
+            "OTEL_METRICS_EXPORTER" to "logging",
+            "OTEL_LOGS_EXPORTER" to "logging",
+        )
 }
 
 listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->

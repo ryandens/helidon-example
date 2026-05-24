@@ -24,7 +24,7 @@ val copyJmods =
 
 dependencies {
     jmods("temurin26-binaries:OpenJDK26U-jmods_aarch64_linux_hotspot_26.0.1_8:jdk-26.0.1+8@tar.gz")
-    javaagent("io.opentelemetry.javaagent:opentelemetry-javaagent:2.27.0")
+    javaagent("io.opentelemetry.javaagent:opentelemetry-javaagent:2.28.1")
 }
 
 jib.container {

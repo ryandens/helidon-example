@@ -16,7 +16,7 @@ temurinBinaries = { module = "com.ryandens.temurin-binaries-repository:com.ryand
 jibPlugin = {module = "com.google.cloud.tools.jib:com.google.cloud.tools.jib.gradle.plugin", version = "3.5.4"}
 javaagentTest = { module = "com.ryandens.javaagent-test:com.ryandens.javaagent-test.gradle.plugin", version.ref = "javaagent"}
 javaagentJibPlugin = { module = "com.ryandens.javaagent-jib:com.ryandens.javaagent-jib.gradle.plugin", version.ref = "javaagent"}
-otelAgent = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent", version = "2.29.0"}
+otelAgent = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent", version = "2.30.0"}
 
 [plugins]
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

@@ -25,10 +25,10 @@ testing {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(26))
+        languageVersion.set(JavaLanguageVersion.of(27))
     }
 }
 
 tasks.withType<JavaCompile> {
-    this.options.release.set(26)
+    this.options.release.set(27)
 }

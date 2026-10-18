@@ -2,7 +2,7 @@
 [versions]
 spotless = "8.10.4"
 jlink = "0.9.0"
-javaagent = "0.12.2"
+javaagent = "0.13.0"
 
 [libraries]
 junit = { module = "org.junit:junit-bom", version = "6.1.3" }

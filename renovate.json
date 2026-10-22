@@ -2,5 +2,13 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "description": "Skip custom Temurin binary coordinates that cannot be looked up as Maven dependencies",
+      "matchManagers": ["gradle"],
+      "matchPackageNames": ["/^temurin[0-9]+-binaries:/"],
+      "enabled": false
+    }
   ]
 }

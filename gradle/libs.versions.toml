@@ -3,8 +3,11 @@
 spotless = "8.11.0"
 jlink = "0.9.0"
 javaagent = "0.13.0"
+autoDelegate = "0.4.0"
 
 [libraries]
+autoDelegate-annotations = { module = "com.ryandens:auto-delegate-annotations", version.ref = "autoDelegate" }
+autoDelegate-processor = { module = "com.ryandens:auto-delegate-processor", version.ref = "autoDelegate" }
 junit = { module = "org.junit:junit-bom", version = "6.1.3" }
 mockito = { module = "org.mockito:mockito-bom", version = "5.24.0" }
 spotless = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version.ref = "spotless" }
@@ -12,7 +15,6 @@ jandexPlugin = { module = "com.github.vlsi.jandex:com.github.vlsi.jandex.gradle.
 jlinkPlugin = { module = "com.ryandens.jlink-application:com.ryandens.jlink-application.gradle.plugin", version.ref = "jlink"}
 jlinkJibPlugin = { module = "com.ryandens.jlink-jib:com.ryandens.jlink-jib.gradle.plugin", version.ref = "jlink"}
 jlinkJrePlugin = { module = "com.ryandens.jlink-jre:com.ryandens.jlink-jre.gradle.plugin", version.ref = "jlink"}
-temurinBinaries = { module = "com.ryandens.temurin-binaries-repository:com.ryandens.temurin-binaries-repository.gradle.plugin", version.ref = "jlink"}
 jibPlugin = {module = "com.google.cloud.tools.jib:com.google.cloud.tools.jib.gradle.plugin", version = "3.5.4"}
 javaagentTest = { module = "com.ryandens.javaagent-test:com.ryandens.javaagent-test.gradle.plugin", version.ref = "javaagent"}
 javaagentJibPlugin = { module = "com.ryandens.javaagent-jib:com.ryandens.javaagent-jib.gradle.plugin", version.ref = "javaagent"}

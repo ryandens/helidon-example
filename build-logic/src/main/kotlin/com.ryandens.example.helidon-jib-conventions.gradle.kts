@@ -6,24 +6,31 @@ plugins {
     id("com.ryandens.example.jlink-helidon-conventions")
     id("com.google.cloud.tools.jib")
     id("com.ryandens.jlink-jib")
-    id("com.ryandens.temurin-binaries-repository")
     id("com.ryandens.javaagent-jib")
 }
 
-val jmods by configurations.creating {
-    isCanBeResolved = true
-    isCanBeConsumed = false
-    isCanBeDeclared = true
-}
+val jmods =
+    configurations.create("jmods") {
+        isCanBeResolved = true
+        isCanBeConsumed = false
+        isCanBeDeclared = true
+        attributes {
+            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
+            attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
+            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named("jmods"))
+        }
+    }
 
 val copyJmods =
     tasks.register<Copy>("copyJdks") {
+        group = "build"
+        description = "Extracts Linux JDK modules for the container runtime."
         from(provider { tarTree(jmods.singleFile) })
         into(project.layout.buildDirectory.dir("jdks"))
     }
 
 dependencies {
-    jmods("temurin27-binaries:OpenJDK27U-jmods_aarch64_linux_hotspot_27.0.1.0.2_1:jdk-27.0.1.0.2+1@tar.gz")
+    add(jmods.name, "temurin27-binaries:OpenJDK27U-jmods_aarch64_linux_hotspot_27.0.1.0.2_1:jdk-27.0.1.0.2+1@tar.gz")
     javaagent("io.opentelemetry.javaagent:opentelemetry-javaagent:2.33.1")
 }
 
@@ -39,8 +46,7 @@ jib.container {
 
 listOf(tasks.jibDockerBuild, tasks.jibBuildTar, tasks.jib).forEach { jibTask ->
     jibTask {
-        // this dependsOn not needed locally, but was on a GitHub Actions ubuntu runner
-        dependsOn(tasks.processJandexIndex)
+        inputs.files(sourceSets.main.map { it.output })
         notCompatibleWithConfigurationCache("Jib is not compatible with configuration cache")
     }
 }
@@ -51,16 +57,18 @@ jib.from {
 
 val linuxJlinkJre =
     project.tasks.register<JlinkJreTask>("linuxJlinkJre") {
+        group = "build"
+        description = "Builds the Linux runtime used by the container image."
         // by default, JlinkJreTask uses the module path associated with the configured java toolchain that is executing
         // the jlink command, but this can be overridden to instead point at a different jmods directory for the purpose
         // of building a JRE for a different platform
         this.modulePath.fileProvider(copyJmods.map { File(it.destinationDir, "jdk-27.0.1.0.2+1-jmods/") })
-        outputDirectory.set(file(layout.buildDirectory.dir("jlink-jre-linux")))
+        outputDirectory.set(layout.buildDirectory.dir("jlink-jre-linux"))
     }
 
 jlinkJib {
     // by default, this plugin will include the JRE built by the jlinkJre task. Optionally, any directory can be used.
     // this enables the default jlinkJre task to build a JRE for one platform and a custom JlinkJreTask to build a JRE
     // for another platform
-    jlinkJre.value(linuxJlinkJre.map { it.outputDirectory.get() })
+    jlinkJre.value(linuxJlinkJre.flatMap { it.outputDirectory })
 }

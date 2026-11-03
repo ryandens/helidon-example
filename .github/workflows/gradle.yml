@@ -15,7 +15,8 @@ jobs:
         with:
           distribution: temurin
           # Must match the Temurin jmods build in helidon-jib-conventions.
-          java-version: '27.0.0+35'
+          # Adoptium's API identifies jdk-27.0.1.0.2+1 as 27.0.1+0.
+          java-version: '27.0.1+0'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6

@@ -16,7 +16,7 @@ spotless {
 testing {
     suites {
         // Configure the built-in test suite
-        val test by getting(JvmTestSuite::class) {
+        named<JvmTestSuite>("test") {
             // Use JUnit Jupiter test framework
             useJUnitJupiter()
         }
@@ -29,6 +29,6 @@ java {
     }
 }
 
-tasks.withType<JavaCompile> {
+tasks.withType<JavaCompile>().configureEach {
     this.options.release.set(27)
 }

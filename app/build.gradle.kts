@@ -5,9 +5,8 @@ plugins {
 }
 
 dependencies {
-    val autoDelegateVersion = "0.4.0"
-    compileOnly("com.ryandens:auto-delegate-annotations:$autoDelegateVersion")
-    annotationProcessor("com.ryandens:auto-delegate-processor:$autoDelegateVersion")
+    compileOnly(libs.autoDelegate.annotations)
+    annotationProcessor(libs.autoDelegate.processor)
     testImplementation("io.helidon.microprofile.testing:helidon-microprofile-testing-mocking")
     testImplementation("org.mockito:mockito-core")
     testJavaagent("org.mockito:mockito-core")

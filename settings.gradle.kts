@@ -5,21 +5,23 @@ pluginManagement {
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
     id("com.gradle.develocity") version "4.6.1"
+    id("com.ryandens.temurin-binaries-repository") version "0.9.0"
 }
 
-val isCI = providers.environmentVariable("CI").isPresent
+dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+    repositories {
+        mavenCentral()
+    }
+}
 
 develocity {
     buildScan {
+        val ci = providers.environmentVariable("CI")
         termsOfUseUrl.set("https://gradle.com/help/legal-terms-of-use")
         termsOfUseAgree.set("yes")
-        uploadInBackground.set(!isCI)
-
-        if (isCI) {
-            publishing.onlyIf { true }
-        } else {
-            publishing.onlyIf { false }
-        }
+        uploadInBackground.set(ci.map { false }.orElse(true))
+        publishing.onlyIf { ci.isPresent }
     }
 }
 

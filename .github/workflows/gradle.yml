@@ -14,12 +14,26 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          # Must match the Temurin jmods build in helidon-jib-conventions.
-          # Adoptium's API identifies jdk-27.0.1.0.2+1 as 27.0.1+0.
-          java-version: '27.0.1+0'
+      # jlink must come from exactly the same build as the target jmods.
+      - name: Install matching Temurin JDK
+        shell: bash
+        run: |
+          version=$(sed -n 's/^val temurinVersion = "\([^"]*\)"$/\1/p' build-logic/src/main/kotlin/com.ryandens.example.helidon-jib-conventions.gradle.kts)
+          [[ "$version" =~ ^[0-9]+(\.[0-9]+)*\+[0-9]+$ ]]
+          major=${version%%.*}
+          major=${major%%+*}
+          archive="OpenJDK${major}U-jdk_x64_linux_hotspot_${version/+/_}.tar.gz"
+          release="https://github.com/adoptium/temurin${major}-binaries/releases/download/jdk-${version/+/%2B}"
+          download_dir=$(mktemp -d)
+          curl --fail --location --retry 3 "$release/$archive" -o "$download_dir/$archive"
+          curl --fail --location --retry 3 "$release/$archive.sha256.txt" -o "$download_dir/$archive.sha256.txt"
+          (cd "$download_dir" && sha256sum --check "$archive.sha256.txt")
+          jdk_dir="$RUNNER_TEMP/temurin-$version"
+          mkdir -p "$jdk_dir"
+          tar -xzf "$download_dir/$archive" -C "$jdk_dir" --strip-components=1
+          echo "JAVA_HOME=$jdk_dir" >> "$GITHUB_ENV"
+          echo "$jdk_dir/bin" >> "$GITHUB_PATH"
+          "$jdk_dir/bin/java" --version
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6

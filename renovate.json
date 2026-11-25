@@ -3,11 +3,29 @@
   "extends": [
     "config:recommended"
   ],
+  "customManagers": [
+    {
+      "description": "Update annotated Temurin release versions in Kotlin Gradle scripts",
+      "customType": "regex",
+      "managerFilePatterns": ["/\\.gradle\\.kts$/"],
+      "matchStrings": [
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\r?\\n\\s*val \\w+ = \"(?<currentValue>[^\"]+)\""
+      ],
+      "extractVersionTemplate": "^jdk-(?<version>\\d+(?:\\.\\d+)*\\+\\d+)$"
+    }
+  ],
   "packageRules": [
     {
       "description": "Skip custom Temurin binary coordinates that cannot be looked up as Maven dependencies",
       "matchManagers": ["gradle"],
       "matchPackageNames": ["/^temurin[0-9]+-binaries:/"],
+      "enabled": false
+    },
+    {
+      "description": "Keep Temurin binary updates within the current JDK major version",
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": ["/^adoptium\\/temurin[0-9]+-binaries$/"],
+      "matchUpdateTypes": ["major"],
       "enabled": false
     }
   ]

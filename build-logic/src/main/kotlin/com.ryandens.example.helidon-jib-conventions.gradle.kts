@@ -29,8 +29,14 @@ val copyJmods =
         into(project.layout.buildDirectory.dir("jdks"))
     }
 
+// renovate: datasource=github-releases depName=adoptium/temurin27-binaries versioning=loose
+val temurinVersion = "27.0.1.0.2+1"
+
 dependencies {
-    add(jmods.name, "temurin27-binaries:OpenJDK27U-jmods_aarch64_linux_hotspot_27.0.1.0.2_1:jdk-27.0.1.0.2+1@tar.gz")
+    add(
+        jmods.name,
+        "temurin27-binaries:OpenJDK27U-jmods_aarch64_linux_hotspot_${temurinVersion.replace('+', '_')}:jdk-$temurinVersion@tar.gz",
+    )
     javaagent("io.opentelemetry.javaagent:opentelemetry-javaagent:2.34.0")
 }
 
@@ -62,7 +68,7 @@ val linuxJlinkJre =
         // by default, JlinkJreTask uses the module path associated with the configured java toolchain that is executing
         // the jlink command, but this can be overridden to instead point at a different jmods directory for the purpose
         // of building a JRE for a different platform
-        this.modulePath.fileProvider(copyJmods.map { File(it.destinationDir, "jdk-27.0.1.0.2+1-jmods/") })
+        this.modulePath.fileProvider(copyJmods.map { File(it.destinationDir, "jdk-$temurinVersion-jmods/") })
         outputDirectory.set(layout.buildDirectory.dir("jlink-jre-linux"))
     }
 

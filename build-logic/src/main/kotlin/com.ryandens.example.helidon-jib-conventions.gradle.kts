@@ -30,7 +30,7 @@ val copyJmods =
     }
 
 // renovate: datasource=github-releases depName=adoptium/temurin27-binaries versioning=loose
-val temurinVersion = "27.0.1.0.2+1"
+val temurinVersion = "27.0.1.1+4"
 
 dependencies {
     add(

@@ -5,11 +5,12 @@
   ],
   "customManagers": [
     {
-      "description": "Update annotated Temurin release versions in Kotlin Gradle scripts",
+      "description": "Update annotated Temurin release versions in Gradle and GitHub Actions",
       "customType": "regex",
-      "managerFilePatterns": ["/\\.gradle\\.kts$/"],
+      "managerFilePatterns": ["/\\.gradle\\.kts$/", "/^\\.github/workflows/[^/]+\\.ya?ml$/"],
       "matchStrings": [
-        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\r?\\n\\s*val \\w+ = \"(?<currentValue>[^\"]+)\""
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\r?\\n\\s*val \\w+ = \"(?<currentValue>[^\"]+)\"",
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+) versioning=(?<versioning>\\S+)\\r?\\n\\s*java-version: '(?<currentValue>[^']+)'"
       ],
       "extractVersionTemplate": "^jdk-(?<version>\\d+(?:\\.\\d+)*\\+\\d+)$"
     }
